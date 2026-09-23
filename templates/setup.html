@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%2300f0ff' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%2300f0ff'/%3E%3C/svg%3E">
+    <title>F.R.I.D.A.Y. — Setup</title>
+    <link rel="stylesheet" href="/static/css/setup.css">
+    <script src="/static/js/setup.js" defer></script>
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="panel">
+        <div class="boot-line">F.R.I.D.A.Y. // FIRST-TIME CONFIGURATION</div>
+        <h1>API KEY REQUIRED</h1>
+        <p class="sub">
+            This portable build needs your Google Gemini API key to come online.
+            It will be saved to a local <b>.env</b> file next to the executable and
+            remembered for future launches.
+        </p>
+        <label for="api-key">Gemini API Key</label>
+        <input type="password" id="api-key" placeholder="Paste your key here" autocomplete="off" spellcheck="false">
+        <div class="row">
+            <button id="save-btn">Initialize System</button>
+            <button id="show-btn" class="toggle-show" title="Show/Hide key">SHOW</button>
+        </div>
+        <div id="msg" class="msg"></div>
+        <p class="privacy-note">
+            Privacy by default: your key stays in the local <b>.env</b>, screen sharing
+            and memory learning are <b>OFF</b>, and only your typed prompt is sent to
+            Google Gemini. Toggle both anytime from the app.
+        </p>
+        <a class="get-key" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">
+            → Get a free key at aistudio.google.com/apikey
+        </a>
+    </div>
+</body>
+</html>

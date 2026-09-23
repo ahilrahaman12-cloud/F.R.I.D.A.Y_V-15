@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' blob:; font-src 'self'; worker-src blob:; base-uri 'self'; form-action 'self'">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%2300f0ff' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%2300f0ff'/%3E%3C/svg%3E">
+    <title>F.R.I.D.A.Y. Core Command Center</title>
+    <!-- Vendored libraries: served locally, no CDN or network dependency -->
+    <script src="/static/vendor/three/three.min.js" defer></script>
+    <script src="/static/vendor/three/OrbitControls.js" defer></script>
+    <script src="/static/vendor/three/EffectComposer.js" defer></script>
+    <script src="/static/vendor/three/RenderPass.js" defer></script>
+    <script src="/static/vendor/three/ShaderPass.js" defer></script>
+    <script src="/static/vendor/three/UnrealBloomPass.js" defer></script>
+    <script src="/static/vendor/three/CopyShader.js" defer></script>
+    <script src="/static/vendor/three/LuminosityHighPassShader.js" defer></script>
+    <script src="/static/vendor/mediapipe/camera_utils.js" defer></script>
+    <script src="/static/vendor/mediapipe/hands.js" defer></script>
+    <link rel="stylesheet" href="/static/css/friday.css">
+    <script src="/static/js/boot.js" defer></script>
+    <script src="/static/js/scene.js" defer></script>
+    <script src="/static/js/waveform.js" defer></script>
+    <script src="/static/js/voice.js" defer></script>
+    <script src="/static/js/app.js" defer></script>
+</head>
+<body>
+    <!-- AMBIENT HUD GRID & TARGET RETICLE OVERLAY -->
+    <div id="hud-grid-bg"></div>
+    <div id="core-target-hud">
+        <div class="target-ring r1"></div>
+        <div class="target-ring r2"></div>
+        <div class="target-ring r3"></div>
+    </div>
+
+    <!-- REDESIGNED FUTURISTIC SYSTEM INITIALIZATION LOADING OVERLAY -->
+    <div id="credit-overlay">
+        <canvas id="init-hud-canvas"></canvas>
+        <div id="init-hud-content">
+            <div id="init-main-title">SYSTEM INITIALIZING</div>
+            <div id="init-diag-container">
+                <div id="init-diag-status">CORE SYSTEM ........ INITIALIZING</div>
+            </div>
+            <div id="init-progress-bar"><div id="init-progress-fill"></div></div>
+            <div id="init-percent-text">0%</div>
+            <div id="init-author-credit">Made by Ahil Rahaman &amp; Pritam Goswami</div>
+        </div>
+    </div>
+
+    <div id="canvas-container"></div>
+    <video id="gesture-cam" autoplay playsinline></video>
+
+    <div id="header-bar">F.R.I.D.A.Y. CORE COMMAND CENTER</div>
+    <button id="reset-btn" title="Clear conversation memory">RESET SESSION</button>
+    <button id="office-btn" title="Open link dock">OFFICE</button>
+
+    <div id="telemetry-panel">
+        <div class="tele-header">SYSTEM DIAGNOSTICS</div>
+        <div class="tele-item"><span>CORE:</span><span id="tele-core">FRIDAY_v11.0</span></div>
+        <div class="tele-item"><span>STATUS:</span><span id="tele-status">SYNCHRONIZED</span></div>
+        <div class="tele-item"><span>CPU:</span><span id="tele-cpu">0%</span></div>
+        <div class="tele-item"><span>RAM:</span><span id="tele-ram">0%</span></div>
+        <div class="tele-item"><span>GPU:</span><span id="tele-gpu">N/A</span></div>
+        <div class="tele-item"><span>GESTURES:</span><span id="tele-gesture">ACTIVE</span></div>
+    </div>
+
+    <!-- MEMORY LAYERS PANEL (V14: live vault-first memory telemetry) -->
+    <div id="memory-panel">
+        <div class="tele-header">MEMORY LAYERS</div>
+        <div class="tele-item"><span>WORKING:</span><span id="mem-working">--</span></div>
+        <div class="tele-item"><span>SEMANTIC:</span><span id="mem-semantic">--</span></div>
+        <div class="tele-item"><span>STATE:</span><span id="mem-state">--</span></div>
+        <div class="tele-item"><span>VAULT:</span><span id="mem-vault">--</span></div>
+    </div>
+
+    <!-- Time & Date HUD Display -->
+    <div id="chrono-panel">
+        <div class="chrono-label">LOCAL TIME</div>
+        <div class="chrono-time" id="chrono-clock">00:00:00</div>
+        <div class="chrono-date" id="chrono-date">SUN 13 SEP 2026</div>
+    </div>
+
+    <!-- CPU, RAM, GPU Speedometer Gauges -->
+    <div id="gauge-panel">
+        <!-- CPU Gauge -->
+        <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 120 100">
+                <path class="gauge-bg-arc" d="M 23.6 76.0 A 42 42 0 1 1 96.4 76.0" />
+                <path class="gauge-ticks" d="M 21.0 77.5 L 25.0 75.0 M 18.0 55.0 L 23.0 55.0 M 27.5 33.5 L 31.5 36.5 M 46.0 20.0 L 48.5 24.5 M 60.0 15.0 L 60.0 20.0 M 74.0 20.0 L 71.5 24.5 M 92.5 33.5 L 88.5 36.5 M 102.0 55.0 L 97.0 55.0 M 99.0 77.5 L 95.0 75.0" />
+                <circle cx="60" cy="55" r="28" fill="none" stroke="rgba(0, 240, 255, 0.1)" stroke-dasharray="4 2" />
+                <path class="gauge-fill-arc cpu-arc" id="cpu-gauge-arc" d="M 23.6 76.0 A 42 42 0 1 1 96.4 76.0" />
+                <text class="gauge-val-text" x="60" y="54" id="cpu-gauge-val">0%</text>
+            </svg>
+            <div class="gauge-title-label">CPU</div>
+        </div>
+
+        <!-- RAM / MEMORY Gauge -->
+        <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 120 100">
+                <path class="gauge-bg-arc" d="M 23.6 76.0 A 42 42 0 1 1 96.4 76.0" />
+                <circle cx="60" cy="55" r="32" fill="none" stroke="rgba(0, 240, 255, 0.12)" stroke-dasharray="2 4" />
+                <path class="gauge-ticks" d="M 21.0 77.5 L 25.0 75.0 M 18.0 55.0 L 23.0 55.0 M 27.5 33.5 L 31.5 36.5 M 46.0 20.0 L 48.5 24.5 M 60.0 15.0 L 60.0 20.0 M 74.0 20.0 L 71.5 24.5 M 92.5 33.5 L 88.5 36.5 M 102.0 55.0 L 97.0 55.0 M 99.0 77.5 L 95.0 75.0" />
+                <path class="gauge-fill-arc ram-arc" id="ram-gauge-arc" d="M 23.6 76.0 A 42 42 0 1 1 96.4 76.0" />
+                <text class="gauge-val-text" x="60" y="54" id="ram-gauge-val">0%</text>
+            </svg>
+            <div class="gauge-title-label">RAM</div>
+        </div>
+
+        <!-- GPU Gauge -->
+        <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 120 100">
+                <path class="gauge-bg-arc" d="M 23.6 76.0 A 42 42 0 1 1 96.4 76.0" />
+                <path d="M 16 55 L 12 55 M 108 55 L 104 55" stroke="rgba(0, 240, 255, 0.3)" stroke-width="2" />
+                <path class="gauge-ticks" d="M 21.0 77.5 L 25.0 75.0 M 18.0 55.0 L 23.0 55.0 M 27.5 33.5 L 31.5 36.5 M 46.0 20.0 L 48.5 24.5 M 60.0 15.0 L 60.0 20.0 M 74.0 20.0 L 71.5 24.5 M 92.5 33.5 L 88.5 36.5 M 102.0 55.0 L 97.0 55.0 M 99.0 77.5 L 95.0 75.0" />
+                <path class="gauge-fill-arc gpu-arc" id="gpu-gauge-arc" d="M 23.6 76.0 A 42 42 0 1 1 96.4 76.0" />
+                <text class="gauge-val-text" x="60" y="54" id="gpu-gauge-val">N/A</text>
+            </svg>
+            <div class="gauge-title-label">GPU</div>
+        </div>
+    </div>
+
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+
+    <!-- RISKY-ACTION APPROVAL BAR -->
+    <div id="approval-bar">
+        <span id="approval-text">APPROVAL REQUIRED</span>
+        <button class="approval-btn approve" id="approval-approve">APPROVE</button>
+        <button class="approval-btn deny" id="approval-deny">DENY</button>
+    </div>
+
+    <div id="ui-layer">
+        <div id="status-text">SYSTEM STANDBY</div>
+
+        <div id="chat-log">
+            <div class="bubble bot">Boss, standing by for directive...</div>
+        </div>
+
+        <!-- WAVEFORM VISUALIZER -->
+        <canvas id="eq-canvas" width="380" height="28"></canvas>
+
+        <div id="input-container">
+            <span class="input-prompt-symbol">&gt;</span>
+            <input type="text" id="text-input" placeholder="Boss, standing by for directive..." autocomplete="off">
+            <button id="mic-btn" title="Execute Directive">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

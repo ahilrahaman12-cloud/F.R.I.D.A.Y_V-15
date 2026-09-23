@@ -1,0 +1,128 @@
+2026-09-23 13:38:13,063 ERROR friday: chat request failed
+Traceback (most recent call last):
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 233, in chat
+    return jsonify(_async_loop.run(get_brain().think(prompt)))
+                   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 82, in run
+    return asyncio.run_coroutine_threadsafe(coro, self._loop).result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 447, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 396, in __get_result
+    raise self._exception
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\tests\test_production.py", line 29, in think
+    raise RuntimeError(f"boom at {PROJECT_ROOT / 'secret' / 'path.py'} token=abc123")
+RuntimeError: boom at C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\secret\path.py token=abc123
+2026-09-23 13:38:13,104 ERROR friday: TTS request failed
+Traceback (most recent call last):
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 331, in speak
+    audio_b64, mime = _async_loop.run(get_brain().synthesize_speech(text))
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 82, in run
+    return asyncio.run_coroutine_threadsafe(coro, self._loop).result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 454, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 396, in __get_result
+    raise self._exception
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\tests\test_production.py", line 110, in synthesize_speech
+    raise RuntimeError("secret internal detail")
+RuntimeError: secret internal detail
+2026-09-23 13:38:49,935 ERROR friday: chat request failed
+Traceback (most recent call last):
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 233, in chat
+    return jsonify(_async_loop.run(get_brain().think(prompt)))
+                   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 82, in run
+    return asyncio.run_coroutine_threadsafe(coro, self._loop).result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 454, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 396, in __get_result
+    raise self._exception
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\tests\test_production.py", line 29, in think
+    raise RuntimeError(f"boom at {PROJECT_ROOT / 'secret' / 'path.py'} token=abc123")
+RuntimeError: boom at C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\secret\path.py token=abc123
+2026-09-23 13:38:50,102 ERROR friday: TTS request failed
+Traceback (most recent call last):
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 331, in speak
+    audio_b64, mime = _async_loop.run(get_brain().synthesize_speech(text))
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 82, in run
+    return asyncio.run_coroutine_threadsafe(coro, self._loop).result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 454, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 396, in __get_result
+    raise self._exception
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\tests\test_production.py", line 110, in synthesize_speech
+    raise RuntimeError("secret internal detail")
+RuntimeError: secret internal detail
+2026-09-23 18:18:21,959 ERROR friday: chat request failed
+Traceback (most recent call last):
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 231, in chat
+    return jsonify(_async_loop.run(get_brain().think(prompt)))
+                   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 80, in run
+    return asyncio.run_coroutine_threadsafe(coro, self._loop).result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 454, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 396, in __get_result
+    raise self._exception
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\tests\test_production.py", line 29, in think
+    raise RuntimeError(f"boom at {PROJECT_ROOT / 'secret' / 'path.py'} token=abc123")
+RuntimeError: boom at C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\secret\path.py token=abc123
+2026-09-23 18:18:21,990 ERROR friday: TTS request failed
+Traceback (most recent call last):
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 341, in speak
+    audio_b64, mime = _async_loop.run(get_brain().synthesize_speech(text[:1200]))
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 80, in run
+    return asyncio.run_coroutine_threadsafe(coro, self._loop).result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 454, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 396, in __get_result
+    raise self._exception
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\tests\test_production.py", line 110, in synthesize_speech
+    raise RuntimeError("secret internal detail")
+RuntimeError: secret internal detail
+2026-09-23 18:19:14,023 ERROR friday: chat request failed
+Traceback (most recent call last):
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 231, in chat
+    return jsonify(_async_loop.run(get_brain().think(prompt)))
+                   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 80, in run
+    return asyncio.run_coroutine_threadsafe(coro, self._loop).result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 454, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 396, in __get_result
+    raise self._exception
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\tests\test_production.py", line 29, in think
+    raise RuntimeError(f"boom at {PROJECT_ROOT / 'secret' / 'path.py'} token=abc123")
+RuntimeError: boom at C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\secret\path.py token=abc123
+2026-09-23 18:19:14,089 ERROR friday: TTS request failed
+Traceback (most recent call last):
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 341, in speak
+    audio_b64, mime = _async_loop.run(get_brain().synthesize_speech(text[:1200]))
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\app.py", line 80, in run
+    return asyncio.run_coroutine_threadsafe(coro, self._loop).result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 454, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lovel\AppData\Local\Programs\Python\Python314\Lib\concurrent\futures\_base.py", line 396, in __get_result
+    raise self._exception
+  File "C:\Users\lovel\Desktop\project_v1\codebase\~FRIDAY\v3\tests\test_production.py", line 110, in synthesize_speech
+    raise RuntimeError("secret internal detail")
+RuntimeError: secret internal detail
